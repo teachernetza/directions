@@ -3,80 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>City Navigator | Rators Club</title>
+    <title>City Navigator Ultimate | Rators Club</title>
     
     <link rel="icon" href="https://drive.google.com/thumbnail?id=1bOFY9XiVAv-WRQnVHXSnL5FHVEoK3UAp&sz=w128" type="image/png">
     
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        /* ========================================
-           SYSTEM: CITY NAVIGATOR (TITAN MAP ENGINE)
-           ======================================== */
+        /* ==========================================================================
+           1. DESIGN SYSTEM: TITAN "MATTE & FIRM"
+           ========================================================================== */
         :root {
-            /* --- THEME PALETTE --- */
-            --bg-body: #f8fafc;       /* Slate 50 */
-            --bg-sidebar: #ffffff;
+            /* --- Light Theme (Clean & Professional) --- */
+            --bg-body: #f1f5f9;       /* Slate 100 */
+            --bg-sidebar: #ffffff;    /* White */
             --bg-card: #ffffff;
+            --bg-input: #f8fafc;      /* Slate 50 */
+            --bg-map: #e2e8f0;        /* Slate 200 (Ground) */
             
             --text-main: #0f172a;     /* Slate 900 */
-            --text-body: #475569;     /* Slate 600 */
-            --text-light: #94a3b8;    /* Slate 400 */
+            --text-body: #334155;     /* Slate 700 */
+            --text-muted: #64748b;    /* Slate 500 */
+            --text-inverse: #ffffff;
             
-            --border: #e2e8f0;        /* Slate 200 */
+            --border: #cbd5e1;        /* Slate 300 */
             
-            /* --- MAP COLORS --- */
-            --map-road: #e2e8f0;      /* Color de calle */
-            --map-grass: #dcfce7;     /* Zonas verdes */
-            --map-block: #f1f5f9;     /* Manzanas */
+            /* --- Functional Colors (Firm & Solid) --- */
+            --brand: #4f46e5;         /* Indigo 600 */
+            --brand-dark: #3730a3;    /* Indigo 800 */
+            --brand-light: #e0e7ff;   /* Indigo 50 */
             
-            /* --- FUNCTIONAL --- */
-            --brand: #6366f1;         /* Indigo 500 */
-            --brand-dark: #4338ca;    /* Indigo 700 */
-            --accent: #f59e0b;        /* Amber (Highlights) */
+            --accent: #f59e0b;        /* Amber 500 (Highlights) */
+            --accent-bg: #fffbeb;
             
-            --nav-blue: #3b82f6;      /* Blue (Directions) */
-            --loc-red: #ef4444;       /* Red (Location) */
-            --loc-green: #22c55e;     /* Green (Start) */
+            --success: #10b981;       /* Emerald 500 */
+            --success-bg: #ecfdf5;
             
-            /* UI */
-            --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --danger: #ef4444;        /* Red 500 */
+            --danger-bg: #fef2f2;
+            
+            /* --- Map Specifics --- */
+            --road-color: #94a3b8;    /* Slate 400 */
+            --road-line: #ffffff;
+            --grass-color: #bbf7d0;   /* Green 200 */
+            --building-base: #f1f5f9;
+            
+            /* --- UI Physics --- */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius: 16px;
         }
 
+        /* --- Dark Theme (High Contrast / Night Mode) --- */
         body.dark-mode {
             --bg-body: #020617;       /* Slate 950 */
-            --bg-sidebar: #0f172a;
+            --bg-sidebar: #0f172a;    /* Slate 900 */
             --bg-card: #1e293b;       /* Slate 800 */
+            --bg-input: #334155;      /* Slate 700 */
+            --bg-map: #0f172a;
             
-            --text-main: #f8fafc;
-            --text-body: #cbd5e1;
-            --text-light: #64748b;
+            --text-main: #f8fafc;     /* Slate 50 */
+            --text-body: #cbd5e1;     /* Slate 300 */
+            --text-muted: #94a3b8;    /* Slate 400 */
             
-            --border: #334155;
+            --border: #334155;        /* Slate 700 */
             
-            --map-road: #334155;      /* Calle oscura */
-            --map-grass: #064e3b;     /* Pasto oscuro */
-            --map-block: #0f172a;     /* Manzana oscura */
-            
-            --brand: #818cf8;
+            --brand: #818cf8;         /* Indigo 400 */
             --brand-dark: #6366f1;
+            --brand-light: rgba(99, 102, 241, 0.15);
+            
+            --accent: #fbbf24;
+            --accent-bg: rgba(245, 158, 11, 0.15);
+            
+            --success: #34d399;
+            --success-bg: rgba(16, 185, 129, 0.15);
+            
+            --danger: #f87171;
+            --danger-bg: rgba(239, 68, 68, 0.15);
+            
+            /* Dark Map */
+            --road-color: #334155;    /* Slate 700 */
+            --road-line: #64748b;     /* Slate 500 */
+            --grass-color: #064e3b;   /* Emerald 900 */
+            --building-base: #1e293b;
         }
 
-        /* --- BASE RESET --- */
+        /* ==========================================================================
+           2. CORE LAYOUT ENGINE (GRID ARCHITECTURE)
+           ========================================================================== */
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
         
-        body { 
-            font-family: 'Nunito Sans', sans-serif; 
-            background: var(--bg-body); color: var(--text-main); 
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background: var(--bg-body); color: var(--text-main);
             line-height: 1.6; height: 100vh; overflow: hidden;
             display: flex; flex-direction: column;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* --- LAYOUT GRID --- */
+        /* The Master Grid: Fixed Sidebar + Fluid Content */
         .app-shell {
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -84,509 +114,712 @@
             overflow: hidden;
         }
 
-        /* --- MOBILE HEADER --- */
+        /* --- Sidebar Logic --- */
+        .sidebar {
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            display: flex; flex-direction: column;
+            padding: 2rem 1.5rem;
+            z-index: 50; overflow-y: auto;
+        }
+
+        .brand-header {
+            display: flex; align-items: center; gap: 12px;
+            font-family: 'Lora', serif; font-weight: 700; font-size: 1.4rem;
+            color: var(--text-main); margin-bottom: 2.5rem;
+        }
+        .brand-header i { color: var(--brand); font-size: 1.6rem; }
+
+        /* Nav Groups */
+        .nav-group { margin-bottom: 2rem; }
+        .nav-label { 
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; 
+            color: var(--text-muted); font-weight: 800; margin-bottom: 0.8rem; padding-left: 12px;
+        }
+        
+        .nav-item {
+            display: flex; align-items: center; gap: 14px; padding: 14px 16px; width: 100%;
+            border: none; background: transparent; color: var(--text-body); font-weight: 600;
+            border-radius: 12px; cursor: pointer; transition: 0.2s; text-align: left; font-size: 0.95rem; margin-bottom: 4px;
+        }
+        .nav-item:hover { background: var(--bg-body); color: var(--text-main); }
+        .nav-item.active { background: var(--brand); color: #ffffff; box-shadow: var(--shadow-md); }
+        .nav-item i { width: 24px; text-align: center; font-size: 1.1rem; }
+
+        /* --- Content Area --- */
+        .content-area {
+            overflow-y: auto; padding: 3rem 4rem; position: relative;
+            background: var(--bg-body); scroll-behavior: smooth;
+        }
+
+        /* --- Mobile Header (Hidden on Desktop) --- */
         .mobile-bar {
-            display: none; height: 60px; background: var(--bg-sidebar); border-bottom: 1px solid var(--border);
+            display: none; height: 64px; background: var(--bg-sidebar); border-bottom: 1px solid var(--border);
             align-items: center; justify-content: space-between; padding: 0 1.5rem; z-index: 100;
         }
 
-        /* --- SIDEBAR --- */
-        .sidebar {
-            background: var(--bg-sidebar); border-right: 1px solid var(--border);
-            display: flex; flex-direction: column; padding: 2rem 1.5rem;
-            overflow-y: auto; z-index: 50;
+        /* --- Overlay for Mobile --- */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            z-index: 1900; opacity: 0; pointer-events: none; transition: 0.3s;
         }
-        
-        .brand { display: flex; align-items: center; gap: 10px; font-family: 'Lora'; font-weight: 700; font-size: 1.4rem; color: var(--text-main); margin-bottom: 2rem; }
-        .brand i { color: var(--brand); }
+        .overlay.active { opacity: 1; pointer-events: all; }
 
-        .nav-section { margin-bottom: 2rem; }
-        .nav-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-light); font-weight: 800; margin-bottom: 10px; padding-left: 10px; }
-        
-        .nav-item {
-            display: flex; align-items: center; gap: 12px; padding: 12px 16px; width: 100%;
-            border-radius: 12px; cursor: pointer; transition: 0.2s; color: var(--text-body); font-weight: 600;
-            background: transparent; border: none; text-align: left; font-size: 0.95rem; margin-bottom: 5px;
-        }
-        .nav-item:hover { background: var(--bg-body); color: var(--text-main); }
-        .nav-item.active { background: var(--brand); color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
-        .nav-item i { width: 24px; text-align: center; }
-
-        /* --- MAIN CONTENT AREA --- */
-        .content-area {
-            overflow-y: auto; padding: 2rem 3rem; position: relative;
-        }
-
-        /* --- CARDS & TYPOGRAPHY --- */
-        .card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px;
-            padding: 2.5rem; margin-bottom: 2rem; position: relative;
-        }
-        h1 { font-family: 'Lora'; font-size: 2.5rem; margin-bottom: 0.5rem; line-height: 1.1; }
-        h2 { font-family: 'Lora'; font-size: 1.8rem; margin-bottom: 1.5rem; margin-top: 1rem; }
-        p { color: var(--text-body); margin-bottom: 1.5rem; }
-        .tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; background: var(--bg-body); color: var(--brand); border: 1px solid var(--border); margin-bottom: 1rem; }
-
-        /* --- MODULE 1: PREPOSITIONS (VISUAL BLOCK) --- */
-        .prep-stage {
-            background: var(--bg-body); border-radius: 20px; height: 300px; display: flex; 
-            align-items: center; justify-content: center; position: relative; overflow: hidden;
-            border: 2px dashed var(--border); perspective: 1000px;
-        }
-        
-        .landmark {
-            width: 80px; height: 80px; background: var(--text-main); border-radius: 12px;
-            position: absolute; display: flex; align-items: center; justify-content: center;
-            color: var(--bg-card); font-weight: 800; font-size: 2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2;
-        }
-        .landmark.ref { background: var(--brand); z-index: 1; }
-        .landmark span { font-size: 0.8rem; position: absolute; bottom: -25px; color: var(--text-body); width: 100px; text-align: center; font-weight: 600; }
-
-        .prep-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.5rem; justify-content: center; }
-        .btn-prep {
-            padding: 10px 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card);
-            color: var(--text-main); font-weight: 700; cursor: pointer; transition: 0.2s;
-        }
-        .btn-prep:hover, .btn-prep.active { background: var(--text-main); color: var(--bg-card); transform: translateY(-2px); }
-
-        /* --- MODULE 2: NAVIGATION VERBS --- */
-        .verb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .verb-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
-            padding: 1.5rem; text-align: center; cursor: pointer; transition: 0.3s;
-        }
-        .verb-card:hover { border-color: var(--nav-blue); background: rgba(59, 130, 246, 0.05); transform: translateY(-3px); }
-        .verb-icon { font-size: 2.5rem; color: var(--nav-blue); margin-bottom: 1rem; display: block; }
-
-        /* --- THE CITY MAP ENGINE --- */
-        .map-container {
-            width: 100%; aspect-ratio: 16/9; max-height: 500px; background: var(--bg-body);
-            border-radius: 20px; border: 4px solid var(--text-main); position: relative; overflow: hidden;
-            display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(4, 1fr);
-            gap: 20px; padding: 20px; box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
-        }
-        
-        .street-label { 
-            position: absolute; font-size: 0.7rem; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px;
-            pointer-events: none;
-        }
-        .street-h { width: 100%; text-align: center; top: 50%; transform: translateY(-50%); }
-        .street-v { height: 100%; writing-mode: vertical-rl; left: 50%; transform: translateX(-50%); }
-
-        .block {
-            background: var(--bg-card); border-radius: 8px; border: 2px solid var(--border);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            font-size: 0.8rem; font-weight: 700; color: var(--text-main); text-align: center;
-            position: relative; transition: 0.3s; cursor: pointer; z-index: 5;
-        }
-        .block i { font-size: 1.5rem; margin-bottom: 5px; color: var(--text-light); }
-        .block:hover { transform: scale(1.05); border-color: var(--brand); }
-        .block.highlight { border-color: var(--loc-red); background: #fef2f2; animation: pulseRed 1s infinite; }
-        
-        @keyframes pulseRed { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
-
-        /* The Player (Car/Pin) */
-        .player-token {
-            width: 40px; height: 40px; background: var(--brand); border-radius: 50%; border: 3px solid white;
-            position: absolute; top: 0; left: 0; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            display: flex; align-items: center; justify-content: center; color: white; transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .player-arrow { font-size: 1.2rem; transition: 0.3s; }
-
-        /* Controls for Simulator */
-        .sim-controls {
-            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; max-width: 300px; margin: 20px auto 0;
-        }
-        .btn-control {
-            background: var(--bg-card); border: 2px solid var(--border); padding: 15px; border-radius: 12px;
-            font-size: 1.5rem; color: var(--text-main); cursor: pointer; transition: 0.1s;
-        }
-        .btn-control:active { background: var(--brand); color: white; transform: scale(0.95); }
-        .btn-control.big { grid-column: span 3; font-size: 1rem; font-weight: 800; background: var(--brand); color: white; border: none; }
-
-        /* --- GAME MODE OVERLAY --- */
-        .mission-panel {
-            background: var(--bg-sidebar); border: 2px solid var(--accent); padding: 1.5rem; border-radius: 16px;
-            margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 20px;
-        }
-        .timer-badge { background: var(--accent); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 800; }
-
-        /* --- RESPONSIVE --- */
+        /* --- Responsive Breakpoint (Tablets & Mobile) --- */
         @media (max-width: 1024px) {
-            .app-shell { display: block; }
-            .sidebar { position: fixed; top: 60px; left: 0; height: calc(100vh - 60px); width: 85%; transform: translateX(-100%); transition: 0.3s; }
-            .sidebar.active { transform: translateX(0); box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+            .app-shell { display: block; } /* Disable Grid */
+            .sidebar {
+                position: fixed; top: 0; left: 0; height: 100vh; width: 85%; max-width: 320px;
+                transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 10px 0 30px rgba(0,0,0,0.5); z-index: 2000;
+            }
+            .sidebar.active { transform: translateX(0); }
             .mobile-bar { display: flex; }
-            .content-area { padding: 80px 1.5rem 3rem; }
-            .map-container { overflow-x: auto; /* Allow scroll on small mobile */ }
+            .content-area { padding: 84px 1.5rem 4rem; height: 100vh; }
         }
+
+        /* ==========================================================================
+           3. COMPONENT LIBRARY
+           ========================================================================== */
+        
+        /* Typography */
+        h1 { font-family: 'Lora'; font-size: 2.5rem; color: var(--text-main); margin-bottom: 0.5rem; line-height: 1.1; }
+        h2 { font-family: 'Lora'; font-size: 1.8rem; color: var(--text-main); margin-bottom: 1.5rem; margin-top: 1rem; }
+        p { color: var(--text-body); margin-bottom: 1.5rem; font-size: 1.05rem; }
+        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+
+        /* Cards */
+        .section { display: none; animation: slideUp 0.5s ease; max-width: 1100px; margin: 0 auto; }
+        .section.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 3rem; margin-bottom: 2rem; position: relative; overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Badges */
+        .badge { 
+            display: inline-block; padding: 6px 14px; border-radius: 50px; 
+            font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 1.5rem; border: 1px solid;
+        }
+        .badge.brand { background: var(--brand-light); color: var(--brand); border-color: var(--brand); }
+        .badge.accent { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+
+        /* Action Buttons */
+        .btn-main {
+            width: 100%; padding: 18px; border-radius: 12px; border: none; font-size: 1.1rem;
+            font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--brand); color: #ffffff; margin-top: 2rem;
+        }
+        .btn-main:hover { background: var(--brand-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        
+        .btn-outline {
+            padding: 12px 24px; border-radius: 12px; border: 2px solid var(--border);
+            background: transparent; color: var(--text-main); font-weight: 700; cursor: pointer; transition: 0.2s;
+        }
+        .btn-outline:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-light); }
+        .btn-outline.active { background: var(--brand); color: white; border-color: var(--brand); }
+
+        /* Audio Button */
+        .btn-audio {
+            width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--border);
+            background: var(--bg-card); color: var(--text-main); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.2s;
+        }
+        .btn-audio:hover { background: var(--text-main); color: var(--bg-card); transform: scale(1.1); }
+
+        /* ==========================================================================
+           4. VISUAL MODULES (The "Illustrative" Part)
+           ========================================================================== */
+
+        /* --- PREPOSITION CUBE (3D) --- */
+        .prep-visualizer {
+            background: var(--bg-input); border-radius: 20px; height: 350px; 
+            display: flex; align-items: center; justify-content: center; 
+            position: relative; overflow: hidden; border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .center-obj {
+            width: 80px; height: 80px; background: var(--text-main); border-radius: 12px;
+            position: absolute; z-index: 10; display: flex; align-items: center; justify-content: center;
+            color: var(--bg-card); font-size: 2rem; box-shadow: var(--shadow-lg);
+        }
+        
+        .mover-obj {
+            width: 60px; height: 60px; background: var(--brand); border-radius: 12px;
+            position: absolute; z-index: 11; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.5rem; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            opacity: 0; transform: scale(0.5);
+        }
+        .mover-obj.visible { opacity: 1; transform: scale(1); }
+
+        /* --- VOCAB FLIP CARDS --- */
+        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        
+        .flip-card {
+            background-color: transparent; width: 100%; height: 220px; perspective: 1000px; cursor: pointer;
+        }
+        .flip-inner {
+            position: relative; width: 100%; height: 100%; text-align: center;
+            transition: transform 0.6s; transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+        
+        .flip-front, .flip-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; background: var(--bg-card);
+        }
+        .flip-front i { font-size: 3rem; color: var(--brand); margin-bottom: 15px; }
+        .flip-front h3 { margin: 0; font-size: 1.2rem; }
+        
+        .flip-back { background: var(--brand-light); color: var(--text-main); transform: rotateY(180deg); padding: 1.5rem; }
+        .flip-back p { font-size: 0.9rem; margin: 0; color: var(--text-body); }
+
+        /* ==========================================================================
+           5. THE MAP ENGINE (SIMULATOR & GAME)
+           ========================================================================== */
+        
+        .map-viewport {
+            width: 100%; aspect-ratio: 16/9; max-height: 550px; background: #a8a29e; /* Fallback */
+            border-radius: 20px; border: 4px solid var(--text-main); position: relative; overflow: hidden;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+        }
+
+        .city-grid {
+            display: grid; 
+            grid-template-columns: repeat(6, 1fr); 
+            grid-template-rows: repeat(5, 1fr);
+            width: 100%; height: 100%;
+            background: var(--grass-color); /* Grass Base */
+            gap: 2px; /* Slight gap for definition */
+        }
+
+        /* Map Tiles */
+        .tile {
+            position: relative; display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-align: center;
+            user-select: none;
+        }
+        
+        /* Road Logic */
+        .tile.road { background: var(--road-color); }
+        .tile.road::after { 
+            content:''; position: absolute; width: 30%; height: 30%; 
+            border: 2px dashed var(--road-line); border-radius: 50%; opacity: 0.3; 
+        }
+        
+        /* Building Logic */
+        .tile.building {
+            margin: 5px; background: var(--building-base); border-radius: 8px;
+            border-bottom: 4px solid var(--border); transition: 0.2s; cursor: pointer;
+            display: flex; flex-direction: column; color: var(--text-main); box-shadow: var(--shadow-sm);
+        }
+        .tile.building:hover { transform: translateY(-3px); border-color: var(--brand); }
+        .tile.building i { font-size: 1.5rem; margin-bottom: 5px; color: var(--brand); }
+        
+        /* Target Highlight */
+        .tile.target { animation: bounce 1s infinite; border-color: var(--accent); background: var(--accent-bg); }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        /* The Player (Car) */
+        .car-token {
+            width: 40px; height: 40px; background: var(--danger); border-radius: 8px; border: 2px solid white;
+            position: absolute; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex; align-items: center; justify-content: center; color: white;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Smooth Physics */
+        }
+        .car-headlights {
+            position: absolute; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(255,255,200,0.4) 0%, transparent 100%);
+            transform-origin: center; opacity: 0; transition: 0.3s; pointer-events: none;
+        }
+        .car-token.lights-on .car-headlights { opacity: 1; height: 200%; bottom: 100%; }
+
+        /* Controls */
+        .control-panel {
+            background: var(--bg-card); padding: 1.5rem; border-radius: 16px; margin-top: 20px;
+            border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        .d-pad { display: grid; grid-template-columns: 60px 60px 60px; gap: 10px; }
+        .btn-pad { 
+            height: 60px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg-input);
+            font-size: 1.2rem; cursor: pointer; color: var(--text-main); transition: 0.1s;
+        }
+        .btn-pad:active { background: var(--brand); color: white; transform: scale(0.95); }
+        .btn-pad.fwd { grid-column: 2; background: var(--brand-light); color: var(--brand); border-color: var(--brand); }
+
+        /* Game HUD */
+        .game-hud {
+            display: flex; gap: 20px; padding: 15px; background: var(--text-main); color: var(--bg-card);
+            border-radius: 12px; align-items: center; flex: 1;
+        }
+        .hud-timer { font-family: 'JetBrains Mono'; font-weight: 800; color: var(--danger); font-size: 1.2rem; }
+
+        /* ==========================================================================
+           6. FOOTER RIBBON
+           ========================================================================== */
+        .footer-ribbon {
+            background: var(--text-main); color: var(--text-muted);
+            padding: 4rem 2rem 2rem; margin-top: auto;
+        }
+        .footer-grid {
+            max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;
+        }
+        .footer-col h5 { color: white; margin-bottom: 1rem; font-family: 'Lora'; }
+        .footer-col p { font-size: 0.9rem; line-height: 1.8; opacity: 0.8; }
+        .footer-legal {
+            max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center; font-size: 0.75rem; font-family: 'JetBrains Mono'; opacity: 0.5;
+        }
+
     </style>
 </head>
-<body onload="init()">
+<body onload="initSystem()">
+
+<div class="overlay" onclick="closeSidebar()"></div>
 
 <div class="mobile-bar">
-    <div class="brand" style="margin:0; font-size:1.2rem;"><i class="fas fa-map-marked-alt"></i> CityNav</div>
-    <div onclick="toggleSidebar()" style="font-size:1.5rem; cursor:pointer;"><i class="fas fa-bars"></i></div>
+    <div class="brand-header" style="margin:0; font-size:1.1rem;">
+        <i class="fas fa-map-marked-alt"></i> CityNav V5
+    </div>
+    <div onclick="openSidebar()" style="font-size:1.5rem; color:var(--text-main);"><i class="fas fa-bars"></i></div>
 </div>
 
 <div class="app-shell">
     
     <nav class="sidebar" id="sidebar">
-        <div class="brand"><i class="fas fa-map-marked-alt"></i> City Navigator</div>
-        
-        <div class="nav-section">
-            <div class="nav-title">Theory</div>
-            <button class="nav-item active" onclick="nav('intro', this)"><i class="fas fa-compass"></i> Intro & Prepositions</button>
-            <button class="nav-item" onclick="nav('verbs', this)"><i class="fas fa-directions"></i> Movement Verbs</button>
+        <div class="brand-header">
+            <i class="fas fa-map-marked-alt"></i> City Navigator
         </div>
 
-        <div class="nav-section">
-            <div class="nav-title">Simulation</div>
-            <button class="nav-item" onclick="nav('map', this)"><i class="fas fa-car-side"></i> GPS Simulator</button>
-            <button class="nav-item" onclick="nav('game', this)"><i class="fas fa-motorcycle"></i> Pizza Delivery</button>
+        <div class="nav-group">
+            <div class="nav-label">Foundations</div>
+            <button class="nav-item active" onclick="nav('intro', this)"><i class="fas fa-cube"></i> Prepositions 3D</button>
+            <button class="nav-item" onclick="nav('vocab', this)"><i class="fas fa-store"></i> Places & Landmarks</button>
+            <button class="nav-item" onclick="nav('verbs', this)"><i class="fas fa-walking"></i> Movement Verbs</button>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-label">Simulation</div>
+            <button class="nav-item" onclick="nav('sim', this)"><i class="fas fa-car-side"></i> GPS Driving School</button>
+            <button class="nav-item" onclick="nav('game', this)"><i class="fas fa-motorcycle"></i> Pizza Rush (Game)</button>
         </div>
 
         <div style="margin-top:auto;">
             <button class="nav-item" onclick="toggleTheme()" style="justify-content:center; border:1px solid var(--border);">
-                <i class="fas fa-moon"></i> Toggle Theme
+                <i class="fas fa-moon"></i> Dark Mode
             </button>
         </div>
     </nav>
 
     <main class="content-area">
 
-        <section id="sec-intro" class="active">
+        <section id="sec-intro" class="section active">
             <div class="card">
-                <span class="tag">Module 01</span>
-                <h1>The <span style="color:var(--brand);">Compass</span></h1>
-                <p>Las preposiciones de lugar son relativas. Dependen de tu punto de referencia. Usa los botones para visualizar la posición.</p>
+                <span class="badge brand">Module 01</span>
+                <h1>The Spatial <span style="color:var(--brand);">Compass</span></h1>
+                <p>Las preposiciones son relativas. Usa el visualizador para entender la posición exacta.</p>
 
-                <div class="prep-stage">
-                    <div class="landmark ref" id="refObj"><i class="fas fa-landmark"></i><span>The Bank</span></div>
-                    <div class="landmark" id="moveObj" style="display:none; background:var(--accent);"><i class="fas fa-coffee"></i><span>Cafe</span></div>
+                <div class="prep-visualizer">
+                    <div class="center-obj"><i class="fas fa-landmark"></i></div>
+                    <div class="mover-obj" id="prepMover"><i class="fas fa-user"></i></div>
                 </div>
 
-                <div class="prep-controls">
-                    <button class="btn-prep" onclick="showPrep('next')">Next to</button>
-                    <button class="btn-prep" onclick="showPrep('opposite')">Opposite</button>
-                    <button class="btn-prep" onclick="showPrep('behind')">Behind</button>
-                    <button class="btn-prep" onclick="showPrep('near')">Near</button>
+                <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:1.5rem;">
+                    <button class="btn-outline" onclick="setPrep('next')">Next to</button>
+                    <button class="btn-outline" onclick="setPrep('opposite')">Opposite</button>
+                    <button class="btn-outline" onclick="setPrep('behind')">Behind</button>
+                    <button class="btn-outline" onclick="setPrep('between')">Between</button>
                 </div>
             </div>
         </section>
 
-        <section id="sec-verbs" style="display:none;">
+        <section id="sec-vocab" class="section">
             <div class="card">
-                <span class="tag">Vocabulary</span>
-                <h1>Movement <span style="color:var(--nav-blue);">Verbs</span></h1>
-                <p>Dar direcciones son instrucciones de acción (Imperativos). Haz clic para escuchar.</p>
+                <span class="badge accent">Vocabulary</span>
+                <h1>Urban <span style="color:var(--accent);">Landmarks</span></h1>
+                <p>Toca las tarjetas para descubrir la definición y pronunciación.</p>
 
-                <div class="verb-grid">
-                    <div class="verb-card" onclick="speak('Go straight on Main Street.')">
-                        <i class="fas fa-arrow-up verb-icon"></i>
-                        <h3>Go Straight</h3>
-                        <p style="font-size:0.9rem; margin:0;">Seguir derecho</p>
+                <div class="vocab-grid">
                     </div>
-                    <div class="verb-card" onclick="speak('Turn left at the corner.')">
-                        <i class="fas fa-undo verb-icon"></i>
-                        <h3>Turn Left</h3>
-                        <p style="font-size:0.9rem; margin:0;">Girar izquierda</p>
-                    </div>
-                    <div class="verb-card" onclick="speak('Turn right.')">
-                        <i class="fas fa-redo verb-icon"></i>
-                        <h3>Turn Right</h3>
-                        <p style="font-size:0.9rem; margin:0;">Girar derecha</p>
-                    </div>
-                    <div class="verb-card" onclick="speak('Go past the bank.')">
-                        <i class="fas fa-share verb-icon"></i>
-                        <h3>Go Past</h3>
-                        <p style="font-size:0.9rem; margin:0;">Pasar de largo</p>
-                    </div>
-                </div>
-                
-                <button class="btn-prep" style="width:100%; margin-top:2rem; background:var(--brand); color:white; border:none; padding:15px;" onclick="nav('map')">Ir al Simulador de Mapa <i class="fas fa-arrow-right"></i></button>
             </div>
         </section>
 
-        <section id="sec-map" style="display:none;">
+        <section id="sec-verbs" class="section">
             <div class="card">
-                <h1>GPS <span style="color:var(--loc-red);">Simulator</span></h1>
-                <p>Usa los controles para mover el coche por la ciudad. Sigue las instrucciones de voz.</p>
-                
-                <div style="display:flex; gap:10px; margin-bottom:20px; align-items:center;">
-                    <button class="btn-prep" onclick="generateInstruction()"><i class="fas fa-random"></i> Nueva Instrucción</button>
-                    <span id="instructionText" style="font-family:'JetBrains Mono'; font-size:0.9rem; color:var(--text-body);">Waiting for GPS...</span>
+                <h1>Movement <span style="color:var(--success);">Verbs</span></h1>
+                <p>Instrucciones de movimiento (Imperativos).</p>
+                <div class="vocab-grid" id="verbsGrid">
+                    </div>
+                <button class="btn-main" onclick="nav('sim')">Ir al Simulador de Manejo <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section id="sec-sim" class="section">
+            <div class="card">
+                <h1>GPS <span style="color:var(--brand);">Driving School</span></h1>
+                <p>Conduce el coche rojo. Sigue las instrucciones de voz del GPS.</p>
+
+                <div class="control-panel" style="margin-bottom:20px;">
+                    <div style="display:flex; align-items:center; gap:15px; flex:1;">
+                        <button class="btn-audio" onclick="generateGPS()"><i class="fas fa-satellite-dish"></i></button>
+                        <div>
+                            <small style="text-transform:uppercase; font-weight:800; color:var(--text-muted);">Instruction</small>
+                            <div id="gpsText" class="mono" style="font-weight:700;">Waiting for satellite...</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="map-container" id="cityMap">
-                    <div class="player-token" id="player"><i class="fas fa-location-arrow player-arrow" id="pArrow"></i></div>
-                    
+                <div class="map-viewport">
+                    <div class="city-grid" id="simCity"></div>
+                    <div class="car-token" id="simCar">
+                        <div class="car-headlights"></div>
+                        <i class="fas fa-car-side"></i>
                     </div>
+                </div>
 
-                <div class="sim-controls">
-                    <button class="btn-control" onclick="movePlayer('rotateL')"><i class="fas fa-undo"></i></button>
-                    <button class="btn-control big" onclick="movePlayer('forward')">GO STRAIGHT</button>
-                    <button class="btn-control" onclick="movePlayer('rotateR')"><i class="fas fa-redo"></i></button>
+                <div class="control-panel">
+                    <div class="d-pad">
+                        <button class="btn-pad" onclick="moveCar('L')"><i class="fas fa-undo"></i></button>
+                        <button class="btn-pad fwd" onclick="moveCar('F')"><i class="fas fa-arrow-up"></i></button>
+                        <button class="btn-pad" onclick="moveCar('R')"><i class="fas fa-redo"></i></button>
+                    </div>
+                    <p style="font-size:0.8rem; color:var(--text-muted); max-width:200px;">Usa los controles para girar y avanzar. No choques con los edificios.</p>
                 </div>
             </div>
         </section>
 
-        <section id="sec-game" style="display:none;">
+        <section id="sec-game" class="section">
             <div class="card">
-                <h1>Pizza <span style="color:var(--accent);">Delivery</span></h1>
-                <p>Lee la orden y lleva la pizza al edificio correcto antes de que se acabe el tiempo.</p>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                    <h1>Pizza <span style="color:var(--danger);">Rush</span></h1>
+                    <div class="badge danger" style="background:var(--danger); color:white;">LIVE</div>
+                </div>
+                <p>Entrega la pizza en el edificio correcto antes de que se enfríe. (Haz clic en el edificio).</p>
 
-                <div class="mission-panel">
-                    <div>
-                        <h4 style="margin:0; color:var(--text-main);">Current Order:</h4>
-                        <p id="gameOrder" style="margin:0; font-family:'Lora'; font-style:italic; font-size:1.1rem; color:var(--brand);">"Go to the Bank next to the Park."</p>
+                <div class="control-panel" style="background:var(--text-main); color:white; border:none;">
+                    <div class="game-hud">
+                        <i class="fas fa-pizza-slice" style="color:var(--accent);"></i>
+                        <span id="gameOrder" style="font-family:'Lora'; font-style:italic;">"Waiting for order..."</span>
                     </div>
-                    <div class="timer-badge" id="gameTimer">30s</div>
+                    <div class="hud-timer" id="gameTimer">00s</div>
                 </div>
 
-                <div id="gameMapContainer" style="position:relative;">
-                    </div>
-                
-                <button class="btn-prep" style="width:100%; margin-top:1rem; background:var(--success); color:white; border:none;" onclick="startGame()">Start Shift</button>
+                <div class="map-viewport" style="margin-top:20px;">
+                    <div class="city-grid" id="gameCity"></div>
+                </div>
+
+                <button class="btn-main" style="background:var(--success);" onclick="startGame()">Start Shift (30s)</button>
             </div>
         </section>
 
     </main>
+
 </div>
 
+<footer class="footer-ribbon">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h5>City Navigator V5</h5>
+            <p>Suite educativa avanzada para la enseñanza de direcciones y preposiciones espaciales.</p>
+        </div>
+        <div class="footer-col">
+            <h5>Instructor</h5>
+            <p><b>Teacher Netza Varo</b><br>Tepic, Nayarit, MX.<br>Est. 2026</p>
+        </div>
+        <div class="footer-col">
+            <h5>Legal</h5>
+            <p>GNU GPL v3.0 License<br>Educational Use Only</p>
+        </div>
+    </div>
+    <div class="footer-legal">
+        BUILT WITH <i class="fas fa-heart" style="color:var(--danger);"></i> & CODE IN MEXICO
+    </div>
+</footer>
+
 <script>
-    /* ========================================
-       TITAN MAP ENGINE v1.0
-       ======================================== */
+    /* ==========================================================================
+       TITAN ENGINE V5: LOGIC CORE
+       ========================================================================== */
     
-    // --- AUDIO ---
+    // --- 1. AUDIO ENGINE (ROBUST) ---
     const synth = window.speechSynthesis;
-    let voice = null;
-    function loadVoice() {
+    let engVoice = null;
+
+    function initAudio() {
         const voices = synth.getVoices();
-        voice = voices.find(v => v.lang === 'en-US' && v.name.includes('Google')) || voices.find(v => v.lang === 'en-US');
+        engVoice = voices.find(v => v.name.includes("Google US")) || voices.find(v => v.lang === 'en-US');
     }
-    if(speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = loadVoice;
-    
+    if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = initAudio;
+
     function speak(text) {
         if(synth.speaking) synth.cancel();
         const u = new SpeechSynthesisUtterance(text);
-        if(voice) u.voice = voice;
+        if(engVoice) u.voice = engVoice;
         u.rate = 0.9;
         synth.speak(u);
     }
 
-    // --- UI ---
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-    function toggleTheme() { document.body.classList.toggle('dark-mode'); }
-    
-    function nav(id, btn) {
-        document.querySelectorAll('section').forEach(s => s.style.display = 'none');
-        document.getElementById('sec-' + id).style.display = 'block';
-        
-        if(btn) {
-            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            if(window.innerWidth <= 1024) toggleSidebar();
-        }
-        
-        if(id === 'map') initMap('cityMap', false);
-        if(id === 'game') initMap('gameMapContainer', true);
-    }
-
-    // --- VISUALIZER LOGIC ---
-    function showPrep(type) {
-        const move = document.getElementById('moveObj');
-        const ref = document.getElementById('refObj');
-        move.style.display = 'flex';
-        move.style.transition = '0.5s';
-        
-        // Reset
-        move.style.zIndex = 2; ref.style.zIndex = 1;
-        move.style.transform = 'scale(1)'; move.style.opacity = '1';
-
-        switch(type) {
-            case 'next':
-                move.style.left = '60%'; move.style.top = 'calc(50% - 40px)';
-                speak("Next to");
-                break;
-            case 'opposite':
-                move.style.left = '20%'; move.style.top = 'calc(50% - 40px)';
-                // Simulate street in between
-                speak("Opposite");
-                break;
-            case 'behind':
-                move.style.left = 'calc(50% - 40px)'; move.style.top = 'calc(50% - 60px)';
-                move.style.zIndex = 0; ref.style.zIndex = 2;
-                move.style.transform = 'scale(0.9)'; move.style.opacity = '0.8';
-                speak("Behind");
-                break;
-            case 'near':
-                move.style.left = '80%'; move.style.top = '20%';
-                speak("Near");
-                break;
-        }
-    }
-
-    // --- MAP DATA ---
-    // 5x4 Grid. 0 = Road, String = Building ID
-    const cityLayout = [
-        ['Bank', 0, 'Library', 0, 'School'],
-        [0, 0, 0, 0, 0],
-        ['Cafe', 0, 'Park', 0, 'Gym'],
-        [0, 0, 0, 0, 0]
+    // --- 2. MAP DATA MODEL ---
+    // 0 = Road, 1 = Grass, Strings = Buildings
+    // Grid 6x5
+    const cityMapData = [
+        ['Bank', 1, 'Library', 0, 'School', 1],
+        [0, 0, 0, 0, 0, 0],
+        ['Cafe', 1, 'Park', 0, 'Gym', 1],
+        [0, 0, 0, 0, 0, 0],
+        [1, 'Hospital', 1, 0, 'Cinema', 1]
     ];
-    
-    // Player State
-    let px = 0, py = 1; // Start on road
-    let dir = 90; // 0=N, 90=E, 180=S, 270=W
 
-    function initMap(containerId, isGame) {
-        const container = document.getElementById(containerId);
-        if(isGame) container.className = "map-container"; // Ensure style
-        container.innerHTML = ''; // Clear
+    const iconMap = {
+        'Bank': 'fa-landmark', 'Library': 'fa-book', 'School': 'fa-graduation-cap',
+        'Cafe': 'fa-coffee', 'Park': 'fa-tree', 'Gym': 'fa-dumbbell',
+        'Hospital': 'fa-hospital', 'Cinema': 'fa-film'
+    };
+
+    // --- 3. SIMULATOR LOGIC ---
+    let carX = 3, carY = 2; // Start center
+    let carDir = 0; // 0=N, 90=E, 180=S, 270=W
+
+    function renderMap(containerId, isGame) {
+        const grid = document.getElementById(containerId);
+        grid.innerHTML = '';
         
-        // Re-add player if simulator
-        if(!isGame) {
-            container.innerHTML = `<div class="player-token" id="player"><i class="fas fa-location-arrow player-arrow" id="pArrow"></i></div>`;
-            updatePlayerPos();
-        } else {
-            // Game uses click-to-deliver, no car
-        }
-
-        // Render Grid
-        cityLayout.forEach((row, y) => {
+        cityMapData.forEach((row, y) => {
             row.forEach((cell, x) => {
-                const div = document.createElement('div');
-                div.style.gridColumnStart = x + 1;
-                div.style.gridRowStart = y + 1;
+                const tile = document.createElement('div');
+                tile.className = 'tile';
                 
-                if(cell !== 0) {
-                    div.className = 'block';
-                    div.innerHTML = `<i class="fas fa-building"></i><div>${cell}</div>`;
-                    if(isGame) div.onclick = () => checkDelivery(cell, div);
+                if (cell === 0) {
+                    tile.classList.add('road');
+                } else if (cell === 1) {
+                    tile.style.backgroundColor = 'var(--grass-color)';
                 } else {
-                    // Road markers (optional)
+                    tile.classList.add('building');
+                    tile.innerHTML = `<i class="fas ${iconMap[cell]}"></i><div>${cell}</div>`;
+                    if(isGame) tile.onclick = () => checkDelivery(cell, tile);
                 }
-                container.appendChild(div);
+                
+                tile.style.gridColumnStart = x + 1;
+                tile.style.gridRowStart = y + 1;
+                grid.appendChild(tile);
             });
         });
     }
 
-    // --- SIMULATOR LOGIC ---
-    function updatePlayerPos() {
-        const player = document.getElementById('player');
-        const arrow = document.getElementById('pArrow');
+    function updateCar() {
+        const car = document.getElementById('simCar');
+        // Calculate % positions based on 6 cols / 5 rows
+        const colW = 100/6; 
+        const rowH = 100/5;
         
-        // Grid calculations: Gap is 20px. 
-        // We calculate % based on 5 cols / 4 rows
-        const colW = 100/5;
-        const rowH = 100/4;
+        const left = (carX * colW) + (colW/2) - 3; // Center correction
+        const top = (carY * rowH) + (rowH/2) - 5;
         
-        // Centering in cell
-        const left = (px * colW) + (colW/2) - 2; // -2% adjustment roughly
-        const top = (py * rowH) + (rowH/2) - 5; 
-
-        player.style.left = `${left}%`;
-        player.style.top = `${top}%`;
-        arrow.style.transform = `rotate(${dir - 45}deg)`; // Icon native angle correction
+        car.style.left = `${left}%`;
+        car.style.top = `${top}%`;
+        car.style.transform = `rotate(${carDir}deg)`;
+        
+        // Headlights on if moving North (optional effect)
+        // car.classList.toggle('lights-on', carDir === 0);
     }
 
-    function movePlayer(action) {
-        if(action === 'rotateL') dir -= 90;
-        if(action === 'rotateR') dir += 90;
+    function moveCar(cmd) {
+        if(cmd === 'L') carDir -= 90;
+        if(cmd === 'R') carDir += 90;
         
-        if(action === 'forward') {
-            // Normalize angle
-            const heading = (dir % 360 + 360) % 360;
+        if(cmd === 'F') {
+            const rad = (carDir - 90) * (Math.PI / 180); // Adjust for CSS rotation 0=Right usually, but we treat 0=Up/N visually with icons? Actually 0deg in CSS is Up? Let's assume standard math
+            // Fix: In CSS rotate(0) is usually Up if the icon faces up.
+            // Let's implement logical grid movement
+            const normalizedDir = (carDir % 360 + 360) % 360;
             
-            let nx = px, ny = py;
-            if(heading === 0) ny--;    // N
-            if(heading === 90) nx++;   // E
-            if(heading === 180) ny++;  // S
-            if(heading === 270) nx--;  // W
+            let nx = carX, ny = carY;
             
-            // Check bounds
-            if(nx >= 0 && nx < 5 && ny >= 0 && ny < 4) {
-                // Check collision (only drive on roads=0 for simplicity, or allow all)
-                // Let's allow driving everywhere for freedom
-                px = nx; py = ny;
-            } else {
-                // Crash effect?
-                speak("Can't go there.");
+            // Assuming 0deg = Pointing UP/North
+            if(normalizedDir === 0) ny--;
+            if(normalizedDir === 90) nx++;
+            if(normalizedDir === 180) ny++;
+            if(normalizedDir === 270) nx--;
+            
+            // Boundary Check
+            if(nx >= 0 && nx < 6 && ny >= 0 && ny < 5) {
+                // Collision check (Can only drive on 0=Road)
+                // For fun, let's allow driving anywhere but warn on buildings
+                if(typeof cityMapData[ny][nx] === 'string') {
+                    speak("Crash! Building ahead.");
+                    document.getElementById('simCar').style.transform += " scale(1.2)";
+                    setTimeout(updateCar, 200);
+                } else {
+                    carX = nx; carY = ny;
+                }
             }
         }
-        updatePlayerPos();
+        updateCar();
     }
 
-    // --- GPS TASKS ---
-    const tasks = [
-        { text: "Go to the Library.", target: "Library" },
-        { text: "Find the Park.", target: "Park" },
-        { text: "Drive to the Bank.", target: "Bank" }
-    ];
-    
-    function generateInstruction() {
-        const task = tasks[Math.floor(Math.random() * tasks.length)];
-        document.getElementById('instructionText').innerText = task.text;
-        speak(task.text);
-    }
-
-    // --- GAME LOGIC ---
-    let targetBuilding = "";
+    // --- 4. GAME LOGIC ---
     let gameActive = false;
-    let timerVal = 30;
-    let timerInterval;
+    let targetB = '';
+    let timer = 30;
+    let interval;
 
     function startGame() {
-        initMap('gameMapContainer', true);
+        renderMap('gameCity', true);
         gameActive = true;
-        timerVal = 30;
+        timer = 30;
         
-        // Pick random target
-        const buildings = ['Bank', 'Library', 'School', 'Cafe', 'Park', 'Gym'];
-        targetBuilding = buildings[Math.floor(Math.random() * buildings.length)];
+        const targets = ['Bank', 'Library', 'School', 'Cafe', 'Park', 'Gym', 'Hospital', 'Cinema'];
+        targetB = targets[Math.floor(Math.random() * targets.length)];
         
-        document.getElementById('gameOrder').innerText = `Deliver to: ${targetBuilding}`;
-        speak(`Deliver to ${targetBuilding}`);
+        const prep = Math.random() > 0.5 ? "Go to" : "Find the";
+        const txt = `${prep} ${targetB}`;
         
-        clearInterval(timerInterval);
-        timerInterval = setInterval(() => {
-            timerVal--;
-            document.getElementById('gameTimer').innerText = `${timerVal}s`;
-            if(timerVal <= 0) endGame(false);
+        document.getElementById('gameOrder').innerText = txt;
+        speak(txt);
+        
+        if(interval) clearInterval(interval);
+        interval = setInterval(() => {
+            timer--;
+            document.getElementById('gameTimer').innerText = `${timer}s`;
+            if(timer <= 0) endGame(false);
         }, 1000);
     }
 
-    function checkDelivery(clickedBuilding, divElement) {
+    function checkDelivery(building, tile) {
         if(!gameActive) return;
         
-        if(clickedBuilding === targetBuilding) {
+        if(building === targetB) {
             endGame(true);
-            divElement.classList.add('highlight');
+            tile.style.borderColor = 'var(--success)';
+            tile.style.backgroundColor = 'var(--success-bg)';
         } else {
-            speak("Wrong building!");
-            divElement.style.borderColor = 'red';
-            setTimeout(() => divElement.style.borderColor = 'var(--border)', 500);
+            speak("Wrong place!");
+            tile.style.borderColor = 'var(--danger)';
+            setTimeout(() => tile.style.borderColor = 'var(--border)', 500);
         }
     }
 
     function endGame(win) {
         gameActive = false;
-        clearInterval(timerInterval);
+        clearInterval(interval);
         if(win) {
-            confetti();
-            speak("Pizza delivered!");
-            document.getElementById('gameOrder').innerText = "GREAT JOB!";
+            confetti({ particleCount: 150, spread: 80 });
+            speak("Excellent! Delivery complete.");
+            document.getElementById('gameOrder').innerText = "SUCCESS!";
         } else {
-            speak("Time's up!");
-            document.getElementById('gameOrder').innerText = "FAILED - PIZZA COLD";
+            speak("Time over.");
+            document.getElementById('gameOrder').innerText = "FAILED";
         }
     }
 
-    function init() {
-        loadVoice();
+    // --- 5. UI LOGIC ---
+    function openSidebar() { document.getElementById('sidebar').classList.add('active'); document.querySelector('.overlay').classList.add('active'); }
+    function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.querySelector('.overlay').classList.remove('active'); }
+    function toggleTheme() { document.body.classList.toggle('dark-mode'); }
+
+    function nav(id, btn) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById('sec-' + id).classList.add('active');
+        
+        if(btn) {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if(window.innerWidth <= 1024) closeSidebar();
+        }
+        
+        // Init logic per section
+        if(id === 'sim') { renderMap('simCity', false); updateCar(); }
+        if(id === 'vocab') loadVocab();
+        if(id === 'verbs') loadVerbs();
+    }
+
+    function setPrep(type) {
+        const mover = document.getElementById('prepMover');
+        mover.className = 'mover-obj visible';
+        
+        // Reset
+        mover.style.zIndex = 11;
+        
+        switch(type) {
+            case 'next': 
+                mover.style.left = '65%'; mover.style.top = 'calc(50% - 30px)'; 
+                speak("Next to"); break;
+            case 'opposite': 
+                mover.style.left = '15%'; mover.style.top = 'calc(50% - 30px)'; 
+                speak("Opposite"); break;
+            case 'behind': 
+                mover.style.left = 'calc(50% - 30px)'; mover.style.top = 'calc(50% - 50px)'; 
+                mover.style.zIndex = 9; 
+                speak("Behind"); break;
+            case 'between':
+                // Complex animation for between requires 3rd object, simplified here
+                mover.style.left = '50%'; mover.style.top = '20%';
+                speak("Between (Imagining two objects)"); break;
+        }
+    }
+
+    function generateGPS() {
+        const dirs = ["Go straight", "Turn left", "Turn right", "Go past the park", "It's on your left"];
+        const t = dirs[Math.floor(Math.random() * dirs.length)];
+        document.getElementById('gpsText').innerText = t;
+        speak(t);
+    }
+
+    // --- DATA INJECTION ---
+    function loadVocab() {
+        const list = [
+            { w: 'Roundabout', i: 'fa-sync', d: 'Glorieta / Rotonda' },
+            { w: 'Crosswalk', i: 'fa-walking', d: 'Paso de cebra' },
+            { w: 'Traffic Light', i: 'fa-traffic-light', d: 'Semáforo' },
+            { w: 'Corner', i: 'fa-vector-square', d: 'Esquina' }
+        ];
+        const grid = document.querySelector('.vocab-grid');
+        if(grid.children.length > 0) return;
+        
+        list.forEach(item => {
+            grid.innerHTML += `
+                <div class="flip-card" onclick="speak('${item.w}')">
+                    <div class="flip-inner">
+                        <div class="flip-front"><i class="fas ${item.i}"></i><h3>${item.w}</h3></div>
+                        <div class="flip-back"><p>${item.d}</p></div>
+                    </div>
+                </div>`;
+        });
+    }
+
+    function loadVerbs() {
+        const list = [
+            { w: 'Go Straight', i: 'fa-arrow-up' },
+            { w: 'Turn Left', i: 'fa-undo' },
+            { w: 'Turn Right', i: 'fa-redo' },
+            { w: 'Cross', i: 'fa-random' }
+        ];
+        const grid = document.getElementById('verbsGrid');
+        if(grid.children.length > 0) return;
+        
+        list.forEach(item => {
+            grid.innerHTML += `
+                <div class="flip-card" onclick="speak('${item.w}')" style="height:180px;">
+                    <div class="flip-inner">
+                        <div class="flip-front"><i class="fas ${item.i}" style="color:var(--success);"></i><h3>${item.w}</h3></div>
+                        <div class="flip-back" style="background:var(--success-bg);"><p>Action</p></div>
+                    </div>
+                </div>`;
+        });
+    }
+
+    function initSystem() {
+        initAudio();
+        // Load default map
+        renderMap('simCity', false);
+        updateCar();
     }
 
 </script>
